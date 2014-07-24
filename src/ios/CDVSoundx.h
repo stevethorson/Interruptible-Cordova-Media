@@ -21,8 +21,15 @@
 #import <Cordova/CDVSound.h>
 
 @interface CDVSound (ext) {
-    enum CDVMediaStates MEDIA_START_INTERRUPT = 5;
-    enum CDVMediaStates MEDIA_END_INTERRUPT = 6;
+    enum CDVMediaStates {
+        MEDIA_NONE = 0,
+        MEDIA_STARTING = 1,
+        MEDIA_RUNNING = 2,
+        MEDIA_PAUSED = 3,
+        MEDIA_STOPPED = 4,
+        MEDIA_END_INTERRUPT = 5
+    };
+    typedef NSUInteger CDVMediaStates;
 }
 
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
