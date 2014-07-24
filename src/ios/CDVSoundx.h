@@ -23,19 +23,13 @@
 @interface CDVSound (ext)
 
 
-enum CDVMediaStates {
-    MEDIA_NONE = 0,
-    MEDIA_STARTING = 1,
-    MEDIA_RUNNING = 2,
-    MEDIA_PAUSED = 3,
-    MEDIA_STOPPED = 4,
+CDVMediaStates {
     MEDIA_START_INTERRUPT = 5,
     MEDIA_END_INTERRUPT = 6
 };
-typedef NSUInteger CDVMediaStates;
 
-(void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
-(void)audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag;
+- (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
+- (void)audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag;
 
 
 @end
