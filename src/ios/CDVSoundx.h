@@ -23,10 +23,8 @@
 @interface CDVSound (ext)
 
 
-CDVMediaStates {
-    MEDIA_START_INTERRUPT = 5,
-    MEDIA_END_INTERRUPT = 6
-};
+enum CDVMediaStates MEDIA_START_INTERRUPT = 5;
+enum CDVMediaStates MEDIA_END_INTERRUPT = 6;
 
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
 - (void)audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag;
