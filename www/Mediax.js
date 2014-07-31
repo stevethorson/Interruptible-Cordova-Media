@@ -38,7 +38,7 @@ var mediaObjects = {};
  *                                  statusCallback(int statusCode) - OPTIONAL
  */
 var Mediax = function(src, successCallback, errorCallback, statusCallback) {
-    argscheck.checkArgs('SFFF', 'Media', arguments);
+    argscheck.checkArgs('SFFF', 'Mediax', arguments);
     this.id = utils.createUUID();
     mediaObjects[this.id] = this;
     this.src = src;
@@ -47,7 +47,7 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback) {
     this.statusCallback = statusCallback;
     this._duration = -1;
     this._position = -1;
-    exec(null, this.errorCallback, "Media", "create", [this.id, this.src]);
+    exec(null, this.errorCallback, "Mediax", "create", [this.id, this.src]);
 };
 
 // Media messages
@@ -77,7 +77,7 @@ Mediax.get = function(id) {
  */
 Mediax.prototype.play = function(options) {
     alert('test play');
-    exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
+    exec(null, null, "Mediax", "startPlayingAudio", [this.id, this.src, options]);
 };
 
 /**
@@ -87,7 +87,7 @@ Mediax.prototype.stop = function() {
     var me = this;
     exec(function() {
         me._position = 0;
-    }, this.errorCallback, "Media", "stopPlayingAudio", [this.id]);
+    }, this.errorCallback, "Mediax", "stopPlayingAudio", [this.id]);
 };
 
 /**
@@ -97,14 +97,14 @@ Mediax.prototype.seekTo = function(milliseconds) {
     var me = this;
     exec(function(p) {
         me._position = p;
-    }, this.errorCallback, "Media", "seekToAudio", [this.id, milliseconds]);
+    }, this.errorCallback, "Mediax", "seekToAudio", [this.id, milliseconds]);
 };
 
 /**
  * Pause playing audio file.
  */
 Mediax.prototype.pause = function() {
-    exec(null, this.errorCallback, "Media", "pausePlayingAudio", [this.id]);
+    exec(null, this.errorCallback, "Mediax", "pausePlayingAudio", [this.id]);
 };
 
 /**
@@ -125,35 +125,35 @@ Mediax.prototype.getCurrentPosition = function(success, fail) {
     exec(function(p) {
         me._position = p;
         success(p);
-    }, fail, "Media", "getCurrentPositionAudio", [this.id]);
+    }, fail, "Mediax", "getCurrentPositionAudio", [this.id]);
 };
 
 /**
  * Start recording audio file.
  */
 Mediax.prototype.startRecord = function() {
-    exec(null, this.errorCallback, "Media", "startRecordingAudio", [this.id, this.src]);
+    exec(null, this.errorCallback, "Mediax", "startRecordingAudio", [this.id, this.src]);
 };
 
 /**
  * Stop recording audio file.
  */
 Mediax.prototype.stopRecord = function() {
-    exec(null, this.errorCallback, "Media", "stopRecordingAudio", [this.id]);
+    exec(null, this.errorCallback, "Mediax", "stopRecordingAudio", [this.id]);
 };
 
 /**
  * Release the resources.
  */
 Mediax.prototype.release = function() {
-    exec(null, this.errorCallback, "Media", "release", [this.id]);
+    exec(null, this.errorCallback, "Mediax", "release", [this.id]);
 };
 
 /**
  * Adjust the volume.
  */
 Mediax.prototype.setVolume = function(volume) {
-    exec(null, null, "Media", "setVolume", [this.id, volume]);
+    exec(null, null, "Mediax", "setVolume", [this.id, volume]);
 };
 
 /**
