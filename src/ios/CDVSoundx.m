@@ -19,7 +19,7 @@
 
 #import "CDVSoundx.h"
 
-@implementation CDVSound (ext)
+@implementation CDVSound (CDVSoundx)
 
 
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {

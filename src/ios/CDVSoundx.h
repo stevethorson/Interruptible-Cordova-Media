@@ -20,9 +20,7 @@
 #import <Cordova/CDVPlugin.h>
 #import <Cordova/CDVSound.h>
 
-@interface CDVSound (ext) {
-
-}
+@interface CDVSound (CDVSoundx)
 
 typedef enum {
     MEDIA_END_INTERRUPT = MEDIA_STOPPED + 1

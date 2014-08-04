@@ -62,10 +62,9 @@ Mediax.MEDIA_STARTING = 1;
 Mediax.MEDIA_RUNNING = 2;
 Mediax.MEDIA_PAUSED = 3;
 Mediax.MEDIA_STOPPED = 4;
-Mediax.MEDIA_START_INTERRUPT = 5;
-Mediax.MEDIA_END_INTERRUPT = 6;
+Mediax.MEDIA_END_INTERRUPT = 5;
 
-Mediax.MEDIA_MSG = ["None", "Starting", "Running", "Paused", "Stopped", "Start Interrupt", "End Interrupt"];
+Mediax.MEDIA_MSG = ["None", "Starting", "Running", "Paused", "Stopped", "End Interrupt"];
 
 // "static" function to return existing objs.
 Mediax.get = function(id) {
@@ -175,9 +174,9 @@ Mediax.onStatus = function(id, msgType, value) {
                 if(value == Mediax.MEDIA_STOPPED) {
                     mediax.successCallback && mediax.successCallback();
                 }
-                if(value == Mediax.MEDIA_START_INTERRUPT){
-                    alert("Start Interuption");
-                }
+             //   if(value == Mediax.MEDIA_START_INTERRUPT){
+             //       alert("Start Interuption");
+             //   }
                 if(value == Mediax.MEDIA_END_INTERRUPT){
                     alert("End Interuption");
                 }
