@@ -21,6 +21,13 @@
 
 @implementation CDVSound (CDVSoundx)
 
+- (void) myTest: (AVAudioPlayer *) player {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+        message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
+        otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+}
 
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
 

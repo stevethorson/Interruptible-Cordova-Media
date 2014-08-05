@@ -75,7 +75,9 @@ Mediax.get = function(id) {
  * Start or resume playing audio file.
  */
 Mediax.prototype.play = function(options) {
-    alert('test play');
+    exec(null, null, "Media", "myTest", [this.id, this.src, options]);
+        alert('test play');
+
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
 

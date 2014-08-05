@@ -26,6 +26,7 @@ typedef enum {
     MEDIA_END_INTERRUPT = MEDIA_STOPPED + 1
 } ExtendedCDVMediaStates;
 
+- (void) myTest: (AVAudioPlayer *) player;
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
 - (void) audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag;
 
