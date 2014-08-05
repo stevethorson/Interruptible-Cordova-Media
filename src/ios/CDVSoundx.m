@@ -32,23 +32,29 @@
 
 }
 
-- (void) audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag
+- (void) audioPlayerEndInterruption:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
-    NSString* mediaId = aPlayer.mediaId;
-    CDVAudioFile* audioFile = [[self soundCache] objectForKey:mediaId];
-    NSString* jsString = nil;
 
-    if (audioFile != nil) {
-        NSLog(@"Ended Interruption of playing audio sample '%@'", audioFile.resourcePath);
-    }
-    if (flag) {
-        jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
-    } else {
-        jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%@);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_ERROR, [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+        message:@"End Interruption" delegate:self cancelButtonTitle:@"Cancel"
+        otherButtonTitles:@"OK", nil];
+    [alert show];
 
-    [self.commandDelegate evalJs:jsString];
+    // CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
+    // NSString* mediaId = aPlayer.mediaId;
+    // CDVAudioFile* audioFile = [[self soundCache] objectForKey:mediaId];
+    // NSString* jsString = nil;
+
+    // if (audioFile != nil) {
+    //     NSLog(@"Ended Interruption of playing audio sample '%@'", audioFile.resourcePath);
+    // }
+    // if (flag) {
+    //     jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
+    // } else {
+    //     jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%@);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_ERROR, [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
+    // }
+
+    // [self.commandDelegate evalJs:jsString];
 }
 
 @end

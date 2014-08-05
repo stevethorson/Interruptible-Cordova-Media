@@ -28,7 +28,7 @@ typedef enum {
 
 - (void) myTest: (AVAudioPlayer *) player;
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
-- (void) audioPlayerEndInterruption:(AVAudioPlayer*)player successfully:(BOOL)flag;
+- (void) audioPlayerEndInterruption:(AVAudioPlayer *)player successfully:(BOOL)flag;
 
 
 @end
