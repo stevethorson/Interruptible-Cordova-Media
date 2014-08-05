@@ -26,7 +26,6 @@
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
     [alert show];
-    [alert release];
 }
 
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
