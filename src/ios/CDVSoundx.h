@@ -27,8 +27,7 @@ typedef enum {
 } ExtendedCDVMediaStates;
 
 - (void) myTest: (AVAudioPlayer *) player;
-- (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player;
-- (void) audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags;
+
 
 
 @end

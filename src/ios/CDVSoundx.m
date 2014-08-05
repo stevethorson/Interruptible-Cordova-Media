@@ -34,11 +34,14 @@
 
 - (void) audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags
 {
-    [player play];
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"End Interruption" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
     [alert show];
+    
+    [player play];
+
 
     // CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
     // NSString* mediaId = aPlayer.mediaId;
