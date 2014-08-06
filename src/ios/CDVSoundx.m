@@ -32,14 +32,14 @@
 
 }
 
-- (void) audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags
-{
+
+- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"End Interruption" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
     [alert show];
-    
+
     [player play];
 
 
