@@ -21,13 +21,18 @@
 
 @implementation CDVSound (CDVSoundx)
 
-- (void) myTest: (AVAudioPlayer *) player {
+- (void) myTest:(CDVInvokedUrlCommand*)command{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
 
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-    [self.commandDelegate evalJs:@"cordova.require('Mediax').logger"];
+    //[self.commandDelegate evalJs:@"cordova.require('com.hybyr.mediax').logger"];
+    
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
