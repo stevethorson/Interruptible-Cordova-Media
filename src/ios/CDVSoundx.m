@@ -67,9 +67,9 @@
                 otherButtonTitles:@"OK", nil];
             [alert show];
             //Resume your audio
-            NSLog(@"Player status %i", self.player.status);
+            //NSLog(@"Player status %i", self.player.status);
             // Resume playing the audio.
-            [self.player play];
+            //[self.player play];
 
         }
     }
@@ -88,7 +88,7 @@
         otherButtonTitles:@"OK", nil];
     [alert show];
 
-    [player play];*/
+    [player play];
 
 
     // CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
@@ -106,6 +106,6 @@
     // }
 
     // [self.commandDelegate evalJs:jsString];
-}
+}*/
 
 @end
