@@ -20,7 +20,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
-id="com.hybyr.Mediax"
+id="com.hybyr.mediax"
     version="0.2.12-dev">
 
     <name>Mediax</name>
@@ -30,7 +30,7 @@ id="com.hybyr.Mediax"
     <dependency id="org.apache.cordova.media" version=">=0.2.12-dev" />
 
     <js-module src="www/Mediax.js" name="Mediax">
-        <clobbers target="com.hybyr" />
+        <clobbers target="window.Mediax" />
     </js-module>
     
      <!-- ios -->

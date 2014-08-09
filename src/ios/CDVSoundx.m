@@ -27,7 +27,7 @@
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-    [self.commandDelegate evalJs:@"cordova.require('com.hybyr.Mediax').logger"];
+    [self.commandDelegate evalJs:@"cordova.require('Mediax').logger"];
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
