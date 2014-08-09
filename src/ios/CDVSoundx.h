@@ -27,7 +27,7 @@ typedef enum {
 } ExtendedCDVMediaStates;
 
 - (void) myTest: (AVAudioPlayer *) player;
-
+- (void) onAudioSessionEvent: (NSNotification *) notification;
 
 
 @end
