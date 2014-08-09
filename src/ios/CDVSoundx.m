@@ -24,6 +24,11 @@
 - (void) myTest: (AVAudioPlayer *) player {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
 
+
+    //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
+    //[self.commandDelegate evalJs:jsString]
+    [self.commandDelegate evalJS:@"cordova.require('com.hybyr.mediax').logger"];
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
@@ -40,40 +45,19 @@
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
     //NSLog(@"Interruption notification name %@", notification.name);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-        message:@"some interruption notification" delegate:self cancelButtonTitle:@"Cancel"
+    UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+        message:@"audioSessionEvent" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
-    [alert show];
-
-    if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-        //NSLog(@"Interruption notification received %@!", notification);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-            message:@"INTERRUPTION NOTIFICATION RECEIVED" delegate:self cancelButtonTitle:@"Cancel"
-            otherButtonTitles:@"OK", nil];
-        [alert show];
-
-        //Check to see if it was a Begin interruption
-        if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
-            //NSLog(@"Interruption began!");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-                message:@"INTERRUPTION BEGAN" delegate:self cancelButtonTitle:@"Cancel"
-                otherButtonTitles:@"OK", nil];
-            [alert show];
-
-        } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
-            //NSLog(@"Interruption ended!");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-                message:@"INTERRUPTION ENDED" delegate:self cancelButtonTitle:@"Cancel"
-                otherButtonTitles:@"OK", nil];
-            [alert show];
-            //Resume your audio
-            //NSLog(@"Player status %i", self.player.status);
-            // Resume playing the audio.
-            //[self.player play];
-
-        }
-    }
+    [alert2 show];
 }
+
+- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
+    UIAlertView *alert3 = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+        message:@"audioPlayerEndInterruption" delegate:self cancelButtonTitle:@"Cancel"
+        otherButtonTitles:@"OK", nil];
+    [alert3 show];
+}
+
 
 /*
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {

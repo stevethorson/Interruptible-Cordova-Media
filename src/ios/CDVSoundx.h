@@ -22,12 +22,12 @@
 
 @interface CDVSound (CDVSoundx)
 
-typedef enum {
+/*typedef enum {
     MEDIA_END_INTERRUPT = MEDIA_STOPPED + 1
-} ExtendedCDVMediaStates;
+} ExtendedCDVMediaStates;*/
 
 - (void) myTest: (AVAudioPlayer *) player;
 - (void) onAudioSessionEvent: (NSNotification *) notification;
-
+- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player;
 
 @end

@@ -71,12 +71,23 @@ Mediax.get = function(id) {
     return mediaObjects[id];
 };
 
+
+
+Mediax.prototype.logger = function(options) {
+    steroids.logger.log("LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG");
+}
+
+
+
+
+
+
 /**
  * Start or resume playing audio file.
  */
 Mediax.prototype.play = function(options) {
+    steroids.logger.log("mediax play");
     exec(null, null, "Media", "myTest", [this.id, this.src, options]);
-        alert('test play');
 
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
