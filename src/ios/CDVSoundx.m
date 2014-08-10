@@ -23,7 +23,7 @@
 
 - (void) myTest:(CDVInvokedUrlCommand*)command{
      NSString* mediaId = [command.arguments objectAtIndex:0];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:mediaId:) name:AVAudioSessionInterruptionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) withObject:mediaId name:AVAudioSessionInterruptionNotification object:nil];
 
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
