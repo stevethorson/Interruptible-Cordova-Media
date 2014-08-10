@@ -87,7 +87,7 @@ Mediax.prototype.logger = function(options) {
  */
 Mediax.prototype.play = function(options) {
     steroids.logger.log("mediax play");
-    exec(function(result){steroids.logger.log("native layer success")}, function(err){steroids.logger.log("native layer error")}, "Media", "myTest", [this.id, this.src, options]);
+    exec(function(result){steroids.logger.log(JSON.stringify(result))}, function(err){steroids.logger.log("native layer error")}, "Media", "myTest", [this.id, this.src, options]);
 
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
