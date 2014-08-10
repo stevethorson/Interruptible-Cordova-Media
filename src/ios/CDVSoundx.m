@@ -22,7 +22,8 @@
 @implementation CDVSound (CDVSoundx)
 
 - (void) myTest:(CDVInvokedUrlCommand*)command{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
+     NSString* mediaId = [command.arguments objectAtIndex:0];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:withId:) name:AVAudioSessionInterruptionNotification object:nil];
 
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
@@ -46,18 +47,13 @@
 }
 
 
-
-
-
-- (void) onAudioSessionEvent: (NSNotification *) notification
+- (void) onAudioSessionEvent:(NSNotification *)notification withId:(NSString*)mediaId
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
    /* NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
     NSString* jsString1 = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage1];
     [self.commandDelegate evalJs:jsString1];*/
 
-
-     NSString* mediaId = *player.mediaId;
 
 
     if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
