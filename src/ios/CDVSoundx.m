@@ -29,7 +29,7 @@
     //[self.commandDelegate evalJs:jsString]
     NSString* jsString = nil;
     NSString* theMessage = @"hurray hurray it worked";
-    jsString = [NSString stringWithFormat:@"%@(%@);", @"cordova.require('com.hybyr.mediax.Mediax').logger", theMessage];
+    jsString = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage];
     [self.commandDelegate evalJs:jsString];
     
     CDVPluginResult* pluginResult = nil;
