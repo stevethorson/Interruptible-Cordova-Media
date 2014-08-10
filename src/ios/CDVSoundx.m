@@ -27,6 +27,8 @@
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
+    NSString* jsString = nil;
+    NSString* theMessage = nil;
     theMessage = [NSString @"hurray hurray it worked"];
     jsString = [NSString stringWithFormat:@"%@(\"%@\");", @"cordova.require('window.Mediax.Mediax').logger", theMessage];
     [self.commandDelegate evalJs:jsString];
