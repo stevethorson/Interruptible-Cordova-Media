@@ -52,12 +52,12 @@
 - (void) onAudioSessionEvent: (NSNotification *) notification
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
-    NSString* theMessage1 = @"Interruption notification name %@", [NSString stringWithFormat:@"%d", notification.name];
+    NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
     NSString* jsString1 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage1];
     [self.commandDelegate evalJs:jsString1];
 
     if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-        NSString* theMessage2 = @"Interruption notification received %@!", [NSString stringWithFormat:@"%d", notification];
+        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
         NSString* jsString2 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage2];
         [self.commandDelegate evalJs:jsString2];
 
