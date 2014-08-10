@@ -25,9 +25,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
 
 
-    //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
+    //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-    //[self.commandDelegate evalJs:@"cordova.require('com.hybyr.mediax').logger"];
+    theMessage = [NSString @"hurray hurray it worked"];
+    jsString = [NSString stringWithFormat:@"%@(\"%@\");", @"cordova.require('window.Mediax.Mediax').logger", theMessage];
+    [self.commandDelegate evalJs:jsString];
     
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
@@ -50,10 +52,7 @@
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
     //NSLog(@"Interruption notification name %@", notification.name);
-    UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-        message:@"audioSessionEvent" delegate:self cancelButtonTitle:@"Cancel"
-        otherButtonTitles:@"OK", nil];
-    [alert2 show];
+
 }
 
 - (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
