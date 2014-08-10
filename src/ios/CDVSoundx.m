@@ -33,15 +33,9 @@
     jsString = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage];
     [self.commandDelegate evalJs:jsString];
     
-    CDVPluginResult* pluginResult = nil;
+/*    CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-        message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
-        otherButtonTitles:@"OK", nil];
-    [alert show];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];*/
 
 
 }
@@ -68,7 +62,7 @@
             [self.commandDelegate evalJs:jsString3];
 
 
-            NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_START_INTERRUPT];
+            NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 5];
             [self.commandDelegate evalJs:jsString3B];
             
 
@@ -79,7 +73,7 @@
             [self.commandDelegate evalJs:jsString4];
 
 
-            NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
+            NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 6];
             [self.commandDelegate evalJs:jsString4B];
             //Resume your audio
             //NSLog(@"Player status %i", self.player.status);
