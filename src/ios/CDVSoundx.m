@@ -41,7 +41,7 @@
 }
 
 
-- (void) onAudioSessionEvent:(NSNotification *)notification withId:(NSString*)mediaId
++ (void) onAudioSessionEvent:(NSNotification *)notification withId:(NSString*)mediaId
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
    /* NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];

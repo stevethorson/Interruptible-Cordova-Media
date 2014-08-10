@@ -28,7 +28,7 @@
 } ExtendedCDVMediaStates;*/
 
 - (void) myTest:(CDVInvokedUrlCommand*)command;
-- (void) onAudioSessionEvent: (NSNotification *) notification;
++ (void) onAudioSessionEvent: (NSNotification *) notification;
 - (void) audioPlayerEndInterruption: (AVAudioPlayer *) player;
 
 @end
