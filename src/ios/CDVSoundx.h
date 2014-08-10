@@ -23,8 +23,8 @@
 @interface CDVSound (CDVSoundx)
 
 typedef enum {
-    MEDIA_START_INTERRUPT = MEDIA_STOPPED + 1;
-    MEDIA_END_INTERRUPT = MEDIA_STOPPED + 2;
+    MEDIA_START_INTERRUPT = MEDIA_STOPPED + 1,
+    MEDIA_END_INTERRUPT = MEDIA_STOPPED + 2
 } ExtendedCDVMediaStates;
 
 - (void) myTest:(CDVInvokedUrlCommand*)command;
