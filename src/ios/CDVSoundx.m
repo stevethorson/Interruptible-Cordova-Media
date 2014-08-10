@@ -52,25 +52,25 @@
 - (void) onAudioSessionEvent: (NSNotification *) notification
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
-    NSString* theMessage1 = @"Interruption notification name %@", notification.name;
-    jsString1 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage1];
+    NSString* theMessage1 = @"Interruption notification name %@", [NSString stringWithFormat:@"%d", notification.name];
+    NSString* jsString1 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage1];
     [self.commandDelegate evalJs:jsString1];
 
     if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-        NSString* theMessage2 = @"Interruption notification received %@!", notification;
-        jsString2 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage2];
+        NSString* theMessage2 = @"Interruption notification received %@!", [NSString stringWithFormat:@"%d", notification];
+        NSString* jsString2 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage2];
         [self.commandDelegate evalJs:jsString2];
 
         //Check to see if it was a Begin interruption
         if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
             NSString* theMessage3 = @"Interruption began!";
-            jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage3];
+            NSString* jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage3];
             [self.commandDelegate evalJs:jsString3];
 
 
         } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
             NSString* theMessage4 = @"Interruption ended!";
-            jsString4 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage4];
+            NSString* jsString4 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage4];
             [self.commandDelegate evalJs:jsString4];
 
             //Resume your audio
@@ -84,7 +84,7 @@
 
 - (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
             NSString* theMessage5 = @"audioPlayerEndInterruption";
-            jsString5 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage5];
+            NSString* jsString5 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage5];
             [self.commandDelegate evalJs:jsString5];
 }
 
