@@ -56,8 +56,8 @@
     NSString* jsString1 = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage1];
     [self.commandDelegate evalJs:jsString1];*/
 
-     CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
-     NSString* mediaId = aPlayer.mediaId;
+
+     NSString* mediaId = *player.mediaId;
 
 
     if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
@@ -72,7 +72,7 @@
             [self.commandDelegate evalJs:jsString3];
 
 
-            NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_START_INTERRUPT];
+            NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_START_INTERRUPT];
             [self.commandDelegate evalJs:jsString3B];
             
 
@@ -83,7 +83,7 @@
             [self.commandDelegate evalJs:jsString4];
 
 
-            NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
+            NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
             [self.commandDelegate evalJs:jsString4B];
             //Resume your audio
             //NSLog(@"Player status %i", self.player.status);
