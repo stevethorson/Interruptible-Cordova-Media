@@ -73,8 +73,9 @@ Mediax.get = function(id) {
 
 
 
-Mediax.prototype.logger = function(options) {
+Mediax.prototype.logger = function(message) {
     steroids.logger.log("LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG LOG");
+    steroids.logger.log(message);
 }
 
 
