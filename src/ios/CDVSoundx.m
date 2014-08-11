@@ -27,20 +27,20 @@
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-    NSString* jsString = nil;
+/*    NSString* jsString = nil;
     NSString* theMessage = @"hurray hurray it worked";
     jsString = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage];
-    [self.commandDelegate evalJs:jsString];
+    [self.commandDelegate evalJs:jsString];*/
     
-    CDVPluginResult* pluginResult = nil;
+  /*  CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];*/
 
-
+/*
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
-    [alert show];
+    [alert show];*/
 
 
 }
