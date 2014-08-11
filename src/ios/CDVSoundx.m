@@ -55,7 +55,7 @@
         //Check to see if it was a Begin interruption
         if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
             NSString* theMessage3 = @"Interruption began!";
-            NSString* jsString3 = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage3];
+            NSString* jsString3 = [NSString stringWithFormat:@"%@(%@);", @"window.Mediax.prototype.logger", theMessage3];
             [self.commandDelegate evalJs:jsString3];
 
 
@@ -66,7 +66,7 @@
         //Or an End interruption
         } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
             NSString* theMessage4 = @"Interruption ended!";
-            NSString* jsString4 = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage4];
+            NSString* jsString4 = [NSString stringWithFormat:@"%@(%@);", @"window.Mediax.prototype.logger", theMessage4];
             [self.commandDelegate evalJs:jsString4];
 
 
@@ -86,7 +86,7 @@
 
 - (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
             NSString* theMessage5 = @"audioPlayerEndInterruption";
-            NSString* jsString5 = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage5];
+            NSString* jsString5 = [NSString stringWithFormat:@"%@(%@);", @"window.Mediax.prototype.logger", theMessage5];
             [self.commandDelegate evalJs:jsString5];
 }
 
