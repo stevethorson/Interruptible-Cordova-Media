@@ -19,17 +19,45 @@
 
 #import "CDVSoundx.h"
 
-@interface MyObject : NSObject
-
-@property (assign) NSString * mediaId;
-
-@end
-
 @implementation CDVSound (CDVSoundx)
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
-    self.mediaId = [command.arguments objectAtIndex:0];
+    NSString* mediaId = [command.arguments objectAtIndex:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
+
+
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification *){
+        if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
+/*        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
+        NSString* jsString2 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage2];
+        [self.commandDelegate evalJs:jsString2];*/
+
+            //Check to see if it was a Begin interruption
+            if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
+                NSString* theMessage3 = @"Interruption began!";
+                NSString* jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3];
+                [self.commandDelegate evalJs:jsString3];
+
+
+            } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
+                NSString* theMessage4 = @"Interruption ended!";
+                //need to send back mediaid to know which session to start back up
+                NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, mediaId];
+                [self.commandDelegate evalJs:jsString4];
+
+                //Resume your audio
+                //NSLog(@"Player status %i", self.player.status);
+                // Resume playing the audio.
+                //[self.player play];
+
+            }
+        }
+    }];
+
+
 
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
