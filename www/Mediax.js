@@ -45,6 +45,7 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback, endIn
     this.successCallback = successCallback;
     this.errorCallback = errorCallback;
     this.statusCallback = statusCallback;
+    steroids.logger.log("setting endInterruptionCallback to: " + JSON.stringify(endInterruptionCallback));
     this.endInterruptionCallback = endInterruptionCallback;
     this._duration = -1;
     this._position = -1;
@@ -187,9 +188,9 @@ Mediax.onStatus = function(id, msgType, value) {
     if(media) {
         switch(msgType) {
             case Mediax.MEDIA_STATE :
-                mediax.statusCallback && mediax.statusCallback(value);
+                media.statusCallback && media.statusCallback(value);
                 if(value == Mediax.MEDIA_STOPPED) {
-                    mediax.successCallback && mediax.successCallback();
+                    media.successCallback && media.successCallback();
                 }
                 if(value == Mediax.MEDIA_START_INTERRUPT){
                     steroids.logger.log("ONSTATUS start interruption");
@@ -199,13 +200,13 @@ Mediax.onStatus = function(id, msgType, value) {
                 }
                 break;
             case Mediax.MEDIA_DURATION :
-                mediax._duration = value;
+                media._duration = value;
                 break;
             case Mediax.MEDIA_ERROR :
-                mediax.errorCallback && mediax.errorCallback(value);
+                media.errorCallback && media.errorCallback(value);
                 break;
             case Mediax.MEDIA_POSITION :
-                mediax._position = Number(value);
+                media._position = Number(value);
                 break;
             default :
                 console.error && console.error("Unhandled Mediax.onStatus :: " + msgType);
