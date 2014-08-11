@@ -19,14 +19,47 @@
 
 #import "CDVSoundx.h"
 
-@interface CDVSound : NSObject
-
-@property (assign) NSString * mediaID;
-
-@end
-
 @implementation CDVSound (CDVSoundx)
 
+
+
+- (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
+    NSString* mediaId = [command.arguments objectAtIndex:0];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification *notification){
+        if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
+    /*        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
+            NSString* jsString2 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage2];
+            [self.commandDelegate evalJs:jsString2];*/
+
+            //Check to see if it was a Begin interruption
+            if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
+                NSString* theMessage3 = @"Interruption began!";
+                NSString* jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3];
+                [self.commandDelegate evalJs:jsString3];
+
+
+            } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
+                NSString* theMessage4 = @"Interruption ended!";
+                //need to send back mediaid to know which session to start back up
+                NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, mediaId];
+                [self.commandDelegate evalJs:jsString4];
+
+                //Resume your audio
+                //NSLog(@"Player status %i", self.player.status);
+                // Resume playing the audio.
+                //[self.player play];
+
+            }
+        }
+    }];
+}
+
+
+
+/*
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
     self.mediaId = [command.arguments objectAtIndex:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
@@ -34,20 +67,20 @@
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-/*    NSString* jsString = nil;
+    NSString* jsString = nil;
     NSString* theMessage = @"hurray hurray it worked";
     jsString = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage];
-    [self.commandDelegate evalJs:jsString];*/
+    [self.commandDelegate evalJs:jsString];
     
-  /*  CDVPluginResult* pluginResult = nil;
+    CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];*/
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 
-/*
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
         message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
         otherButtonTitles:@"OK", nil];
-    [alert show];*/
+    [alert show];
 
 
 }
@@ -59,14 +92,14 @@
 - (void) onAudioSessionEvent: (NSNotification *) notification
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
-/*    NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
+    NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
     NSString* jsString1 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage1];
-    [self.commandDelegate evalJs:jsString1];*/
+    [self.commandDelegate evalJs:jsString1];
 
     if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-/*        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
+        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
         NSString* jsString2 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage2];
-        [self.commandDelegate evalJs:jsString2];*/
+        [self.commandDelegate evalJs:jsString2];
 
         //Check to see if it was a Begin interruption
         if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
@@ -89,7 +122,7 @@
         }
     }
 }
-
+*/
 
 
 
