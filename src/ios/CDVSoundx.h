@@ -27,8 +27,7 @@
     MEDIA_END_INTERRUPT = MEDIA_STOPPED + 2
 } ExtendedCDVMediaStates;*/
 
-- (void) myTest:(CDVInvokedUrlCommand*)command;
+- (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
 - (void) onAudioSessionEvent: (NSNotification *) notification;
-- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player;
 
 @end

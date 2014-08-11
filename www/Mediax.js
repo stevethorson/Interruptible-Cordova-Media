@@ -37,7 +37,7 @@ var mediaObjects = {};
  * @param statusCallback        The callback to be called when media status has changed.
  *                                  statusCallback(int statusCode) - OPTIONAL
  */
-var Mediax = function(src, successCallback, errorCallback, statusCallback) {
+var Mediax = function(src, successCallback, errorCallback, statusCallback, endInterruptionCallback) {
     argscheck.checkArgs('SFFF', 'Media', arguments);
     this.id = utils.createUUID();
     mediaObjects[this.id] = this;
@@ -45,9 +45,13 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback) {
     this.successCallback = successCallback;
     this.errorCallback = errorCallback;
     this.statusCallback = statusCallback;
+    this.endInterruptionCallback = endInterruptionCallback;
     this._duration = -1;
     this._position = -1;
-    exec(null, this.errorCallback, "Media", "create", [this.id, this.src]);
+    this.createdSuccess = function(){
+        exec(function(result){steroids.logger.log(result)}, function(err){steroids.logger.log("native layer error")}, "Media", "startListeningForAudioSessionEvent", [this.id, this.src]);
+    }
+    exec(this.createdSuccess, this.errorCallback, "Media", "create", [this.id, this.src]);
 };
 
 // Media messages
@@ -73,15 +77,13 @@ Mediax.get = function(id) {
 };
 
 
-
-Mediax.prototype.logger = function(message) {
-    steroids.logger.log("logger being called");
+Mediax.prototype.interruptionBegan = function(message) {
     steroids.logger.log(message);
-}
-
-
-
-
+};
+Mediax.prototype.interruptionEnded = function(message) {
+    steroids.logger.log(message);
+    this.endInterruptionCallback();
+};
 
 
 /**
@@ -89,8 +91,6 @@ Mediax.prototype.logger = function(message) {
  */
 Mediax.prototype.play = function(options) {
     steroids.logger.log("mediax play");
-    exec(function(result){steroids.logger.log(result)}, function(err){steroids.logger.log("native layer error")}, "Media", "myTest", [this.id, this.src, options]);
-
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
 
