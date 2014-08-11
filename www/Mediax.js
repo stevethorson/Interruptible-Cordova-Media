@@ -81,9 +81,9 @@ Mediax.prototype.interruptionBegan = function(message) {
     steroids.logger.log(message);
 };
 Mediax.prototype.interruptionEnded = function(message, id) {
-    steroids.logger.log(message);
+    steroids.logger.log("message: " + message + " id: " + id);
 
-    var media = mediaObjects[id]
+    var media = mediaObjects[id];
     media.endInterruptionCallback();
 };
 
@@ -92,7 +92,7 @@ Mediax.prototype.interruptionEnded = function(message, id) {
  * Start or resume playing audio file.
  */
 Mediax.prototype.play = function(options) {
-    steroids.logger.log("mediax play");
+    steroids.logger.log("mediax play id: " + this.id + " \n callback: " + JSON.stringify(this.endInterruptionCallback));
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
 
