@@ -23,16 +23,12 @@
 
 - (void) myTest:(CDVInvokedUrlCommand*)command{
      NSString* mediaId = [command.arguments objectAtIndex:0];
-     SEL aSelector = @selector(onAudioSessionEvent:) withObject:mediaId;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:aSelector name:AVAudioSessionInterruptionNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
 
 
     //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
     //[self.commandDelegate evalJs:jsString]
-    NSString* jsString = nil;
-    NSString* theMessage = @"hurray hurray it worked";
-    jsString = [NSString stringWithFormat:@"%@(\"%@\");", @"window.Mediax.prototype.logger", theMessage];
-    [self.commandDelegate evalJs:jsString];
+
     
 /*    CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
@@ -42,7 +38,7 @@
 }
 
 
-- (void) onAudioSessionEvent:(NSNotification *)notification (NSString*)mediaId
+- (void) onAudioSessionEvent:(NSNotification *)notification
 {
     //Check the type of notification, especially if you are sending multiple AVAudioSession events here
    /* NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
@@ -63,8 +59,8 @@
             [self.commandDelegate evalJs:jsString3];
 
 
-            NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 5];
-            [self.commandDelegate evalJs:jsString3B];
+            //NSString* jsString3B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 5];
+            //[self.commandDelegate evalJs:jsString3B];
             
 
         //Or an End interruption
@@ -74,8 +70,11 @@
             [self.commandDelegate evalJs:jsString4];
 
 
-            NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 6];
-            [self.commandDelegate evalJs:jsString4B];
+            //NSString* jsString4B = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"window.Mediax.prototype.onStatus", mediaId, MEDIA_STATE, 6];
+            //[self.commandDelegate evalJs:jsString4B];
+           
+
+
             //Resume your audio
             //NSLog(@"Player status %i", self.player.status);
             // Resume playing the audio.
