@@ -19,9 +19,9 @@
 
 #import "CDVSoundx.h"
 
-@interface CDVSound ()
+@interface CDVSound : NSObject
 
-@property NSString *mediaId;
+@property (assign) NSString * mediaID;
 
 @end
 
