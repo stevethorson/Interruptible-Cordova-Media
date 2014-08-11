@@ -21,7 +21,7 @@
 
 @interface CDVSoundx : NSObject
 
-@property (assign) NSString * mediaID;
+@property NSString *mediaId;
 
 @end
 
