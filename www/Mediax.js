@@ -45,7 +45,7 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback, endIn
     this.successCallback = successCallback;
     this.errorCallback = errorCallback;
     this.statusCallback = statusCallback;
-    steroids.logger.log("setting endInterruptionCallback to: " + JSON.stringify(endInterruptionCallback));
+    steroids.logger.log("setting endInterruptionCallback to: " + endInterruptionCallback);
     this.endInterruptionCallback = endInterruptionCallback;
     this._duration = -1;
     this._position = -1;
@@ -93,7 +93,7 @@ Mediax.prototype.interruptionEnded = function(message, id) {
  * Start or resume playing audio file.
  */
 Mediax.prototype.play = function(options) {
-    steroids.logger.log("mediax play id: " + this.id + " \n callback: " + JSON.stringify(this.endInterruptionCallback));
+    steroids.logger.log("mediax play id: " + this.id + " \n callback: " + this.endInterruptionCallback);
     exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
 };
 
