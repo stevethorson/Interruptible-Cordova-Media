@@ -19,9 +19,16 @@
 
 #import "CDVSoundx.h"
 
+@interface  MyController ()
+
+@property NSString *mediaId;
+
+@end
+
 @implementation CDVSound (CDVSoundx)
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
+    self.mediaId = [command.arguments objectAtIndex:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
 
 
@@ -70,7 +77,8 @@
 
         } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
             NSString* theMessage4 = @"Interruption ended!";
-            NSString* jsString4 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4];
+            //need to send back mediaid to know which session to start back up
+            NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, self.mediaId];
             [self.commandDelegate evalJs:jsString4];
 
             //Resume your audio

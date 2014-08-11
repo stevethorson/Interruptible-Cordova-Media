@@ -80,9 +80,11 @@ Mediax.get = function(id) {
 Mediax.prototype.interruptionBegan = function(message) {
     steroids.logger.log(message);
 };
-Mediax.prototype.interruptionEnded = function(message) {
+Mediax.prototype.interruptionEnded = function(message, id) {
     steroids.logger.log(message);
-    this.endInterruptionCallback();
+
+    var media = mediaObjects[id]
+    media.endInterruptionCallback();
 };
 
 
