@@ -28,6 +28,6 @@
 } ExtendedCDVMediaStates;*/
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
-- (void) onAudioSessionEvent: (NSNotification *) notification;
+- (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
 
 @end

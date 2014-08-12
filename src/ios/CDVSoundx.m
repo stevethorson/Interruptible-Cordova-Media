@@ -22,146 +22,40 @@
 @implementation CDVSound (CDVSoundx)
 
 
-
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
-    //NSString* mediaId = [command.arguments objectAtIndex:0];
+    NSString* mediaId = [command.arguments objectAtIndex:0];
+
+    //allow audio to START in background mode. Otherwise it must be playing when app enters background.
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
+    //listen for audio session interruption[command.arguments objectAtIndex:0]
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
                                                                     object:nil
                                                                      queue:nil
                                                                 usingBlock:^(NSNotification *notification){
         if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-    /*        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
-            NSString* jsString2 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage2];
-            [self.commandDelegate evalJs:jsString2];*/
 
             //Check to see if it was a Begin interruption
             if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
-                NSString* theMessage3 = @"Interruption began!";
-                NSString* jsString3 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3, [command.arguments objectAtIndex:0]];
-                [self.commandDelegate evalJs:jsString3];
+                NSString* jsString1 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionBegan", @"Interruption began!", mediaId];
+                [self.commandDelegate evalJs:jsString1];
 
-
+            //or End interruption
             } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
-                NSString* theMessage4 = @"Interruption ended!";
-                //need to send back mediaid to know which session to start back up
-                NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, [command.arguments objectAtIndex:0]];
-                [self.commandDelegate evalJs:jsString4];
-
-                //Resume your audio
-                //NSLog(@"Player status %i", self.player.status);
-                // Resume playing the audio.
-                //[self.player play];
-
+                NSString* jsString2 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", @"Interruption ended!", mediaId];
+                [self.commandDelegate evalJs:jsString2];
             }
         }
     }];
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[command.arguments objectAtIndex:0]];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:mediaId;
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-
-
-/*
-- (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
-    self.mediaId = [command.arguments objectAtIndex:0];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAudioSessionEvent:) name:AVAudioSessionInterruptionNotification object:nil];
-
-
-    //jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('window.Mediax.Mediax').logger", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT]
-    //[self.commandDelegate evalJs:jsString]
-    NSString* jsString = nil;
-    NSString* theMessage = @"hurray hurray it worked";
-    jsString = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.logger", theMessage];
-    [self.commandDelegate evalJs:jsString];
-    
-    CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Responsetastic"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-        message:@"My message" delegate:self cancelButtonTitle:@"Cancel"
-        otherButtonTitles:@"OK", nil];
-    [alert show];
-
-
+- (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
+    //[[NSNotificationCenter defaultCenter] removeObserver:observer]
+    //where observer is the value that was returned from adding it. That may mean you have to store it in an instance variable rather than a local
 }
-
-
-
-
-
-- (void) onAudioSessionEvent: (NSNotification *) notification
-{
-    //Check the type of notification, especially if you are sending multiple AVAudioSession events here
-    NSString* theMessage1 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification name", notification.name];
-    NSString* jsString1 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage1];
-    [self.commandDelegate evalJs:jsString1];
-
-    if ([notification.name isEqualToString:AVAudioSessionInterruptionNotification]) {
-        NSString* theMessage2 = [NSString stringWithFormat:@"%@: %@", @"Interruption notification received", notification];
-        NSString* jsString2 = [NSString stringWithFormat:@"%@(\'%@\');", @"window.Mediax.prototype.logger", theMessage2];
-        [self.commandDelegate evalJs:jsString2];
-
-        //Check to see if it was a Begin interruption
-        if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
-            NSString* theMessage3 = @"Interruption began!";
-            NSString* jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3];
-            [self.commandDelegate evalJs:jsString3];
-
-
-        } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
-            NSString* theMessage4 = @"Interruption ended!";
-            //need to send back mediaid to know which session to start back up
-            NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, self.mediaId];
-            [self.commandDelegate evalJs:jsString4];
-
-            //Resume your audio
-            //NSLog(@"Player status %i", self.player.status);
-            // Resume playing the audio.
-            //[self.player play];
-
-        }
-    }
-}
-*/
-
-
-
-/*
-- (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
-
-}
-
-
-- (void) audioPlayerEndInterruption: (AVAudioPlayer *) player {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-        message:@"End Interruption" delegate:self cancelButtonTitle:@"Cancel"
-        otherButtonTitles:@"OK", nil];
-    [alert show];
-
-    [player play];
-
-
-    // CDVAudioPlayer* aPlayer = (CDVAudioPlayer*)player;
-    // NSString* mediaId = aPlayer.mediaId;
-    // CDVAudioFile* audioFile = [[self soundCache] objectForKey:mediaId];
-    // NSString* jsString = nil;
-
-    // if (audioFile != nil) {
-    //     NSLog(@"Ended Interruption of playing audio sample '%@'", audioFile.resourcePath);
-    // }
-    // if (flag) {
-    //     jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_STATE, MEDIA_END_INTERRUPT];
-    // } else {
-    //     jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%@);", @"cordova.require('com.hybyr.mediax').onStatus", mediaId, MEDIA_ERROR, [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
-    // }
-
-    // [self.commandDelegate evalJs:jsString];
-}*/
 
 @end
