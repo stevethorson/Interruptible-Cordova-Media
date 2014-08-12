@@ -49,11 +49,10 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback, endIn
     this.endInterruptionCallback = endInterruptionCallback;
     this._duration = -1;
     this._position = -1;
+    var self = this;
     this.createdSuccess = function(){
-        var id = this.id;
-        var src = this.src;
-        steroids.logger.log("just checking id: " + id);
-        exec(function(result){steroids.logger.log("startListeningForAudioSessionEvent successful. Returned ID: " + result)}, function(err){steroids.logger.log("native layer error")}, "Media", "startListeningForAudioSessionEvent", [id, src]);
+        steroids.logger.log("just checking id: " + self.id);
+        exec(function(result){steroids.logger.log("startListeningForAudioSessionEvent successful. Returned ID: " + result)}, function(err){steroids.logger.log("native layer error")}, "Media", "startListeningForAudioSessionEvent", [self.id, self.src]);
     }
     exec(this.createdSuccess, this.errorCallback, "Media", "create", [this.id, this.src]);
 };
