@@ -25,6 +25,7 @@
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
     //NSString* mediaId = [command.arguments objectAtIndex:0];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
                                                                     object:nil
                                                                      queue:nil
