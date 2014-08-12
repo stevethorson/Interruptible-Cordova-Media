@@ -24,7 +24,7 @@
 
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
-    NSString* mediaId = [command.arguments objectAtIndex:0];
+    //NSString* mediaId = [command.arguments objectAtIndex:0];
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
                                                                     object:nil
                                                                      queue:nil
@@ -44,7 +44,7 @@
             } else if([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeEnded]]){
                 NSString* theMessage4 = @"Interruption ended!";
                 //need to send back mediaid to know which session to start back up
-                NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, mediaId];
+                NSString* jsString4 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionEnded", theMessage4, [command.arguments objectAtIndex:0]];
                 [self.commandDelegate evalJs:jsString4];
 
                 //Resume your audio
@@ -55,6 +55,10 @@
             }
         }
     }];
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[command.arguments objectAtIndex:0]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 
