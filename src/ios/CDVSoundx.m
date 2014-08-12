@@ -38,7 +38,7 @@
             //Check to see if it was a Begin interruption
             if ([[notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey] isEqualToNumber:[NSNumber numberWithInt:AVAudioSessionInterruptionTypeBegan]]) {
                 NSString* theMessage3 = @"Interruption began!";
-                NSString* jsString3 = [NSString stringWithFormat:@"%@('%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3];
+                NSString* jsString3 = [NSString stringWithFormat:@"%@('%@','%@');", @"window.Mediax.prototype.interruptionBegan", theMessage3, [command.arguments objectAtIndex:0]];
                 [self.commandDelegate evalJs:jsString3];
 
 
