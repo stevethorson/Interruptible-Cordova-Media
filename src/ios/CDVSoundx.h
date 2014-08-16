@@ -28,6 +28,8 @@
 } ExtendedCDVMediaStates;*/
 
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
+- (void) startRemoteControlAudio: (CDVInvokedUrlCommand*)command;
+- (void) endRemoteControlAudio: (CDVInvokedUrlCommand*)command;
 - (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
 
 @end

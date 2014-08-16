@@ -25,14 +25,6 @@
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
     NSString* mediaId = [command.arguments objectAtIndex:0];
 
-/*  
-    Possible Concern
-    http://stackoverflow.com/questions/3456435/ios-4-remote-controls-for-background-audio
-    To get complete control of remote controls for your app (whether it's in foreground or background) you need to call beginReceivingRemoteControlEvents in application:didFinishLaunchingWithOptions:, but that's not all. Your UIApplicationDelegate starts to receive remote control events after your app tells iOS that it's playing a track - by setting MPNowPlayingInfoCenter nowPlayingInfo property.
-*/
-    //allow audio to START while app is in background mode. Otherwise it must be playing when app enters background.
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-
     //listen for audio session interruption[command.arguments objectAtIndex:0]
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioSessionInterruptionNotification
                                                                     object:nil
@@ -56,6 +48,21 @@
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:mediaId];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void) startRemoteControlAudio: (CDVInvokedUrlCommand*)command{
+    /*  
+    Possible Concern
+    http://stackoverflow.com/questions/3456435/ios-4-remote-controls-for-background-audio
+    To get complete control of remote controls for your app (whether it's in foreground or background) you need to call beginReceivingRemoteControlEvents in application:didFinishLaunchingWithOptions:, but that's not all. Your UIApplicationDelegate starts to receive remote control events after your app tells iOS that it's playing a track - by setting MPNowPlayingInfoCenter nowPlayingInfo property.
+    */
+    //allow audio to START while app is in background mode. Otherwise it must be playing when app enters background.
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+}
+
+- (void) EndRemoteControlAudio:(CDVInvokedUrlCommand*)command{
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+
 }
 
 - (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{

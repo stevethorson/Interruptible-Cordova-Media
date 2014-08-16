@@ -82,7 +82,7 @@ Mediax.get = function(id) {
 
 Mediax.prototype.interruptionBegan = function(message, id) {
     steroids.logger.log("message: " + message + " id: " + id);
-    
+
     var media = mediaObjects[id];
     media.endInterruptionCallback();
 };
@@ -92,6 +92,12 @@ Mediax.prototype.interruptionEnded = function(message, id) {
     var media = mediaObjects[id];
     media.endInterruptionCallback();
 };
+Mediax.prototype.startRemoteControlAudio = function(){
+        exec(null, null, "Media", "startRemoteControlAudio", null);
+}
+Mediax.prototype.endRemoteControlAudio = function(){
+        exec(null, null, "Media", "endRemoteControlAudio", null);
+}
 
 
 /**
