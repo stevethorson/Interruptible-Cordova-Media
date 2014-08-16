@@ -93,10 +93,10 @@ Mediax.prototype.interruptionEnded = function(message, id) {
     media.endInterruptionCallback();
 };
 Mediax.prototype.startRemoteControlAudio = function(){
-        exec(null, null, "Media", "startRemoteControlAudio", null);
+        exec(null, null, "Media", "startRemoteControlAudio", [this.id]);
 }
 Mediax.prototype.endRemoteControlAudio = function(){
-        exec(null, null, "Media", "endRemoteControlAudio", null);
+        exec(null, null, "Media", "endRemoteControlAudio", [this.id]);
 }
 
 

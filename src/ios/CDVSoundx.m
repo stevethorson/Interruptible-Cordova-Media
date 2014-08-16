@@ -50,7 +50,7 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void) startRemoteControlAudio: (CDVInvokedUrlCommand*)command{
+- (void) startRemoteControlAudio:(CDVInvokedUrlCommand*)command{
     /*  
     Possible Concern
     http://stackoverflow.com/questions/3456435/ios-4-remote-controls-for-background-audio
