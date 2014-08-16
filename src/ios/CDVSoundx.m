@@ -54,7 +54,7 @@
     }];
 
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:mediaId;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:mediaId];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
