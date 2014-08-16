@@ -40,6 +40,11 @@ id="com.hybyr.mediax"
                  <param name="ios-package" value="CDVSoundx" /> 
              </feature>
          </config-file>
+         <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                 <string>audio</string>
+            </array>
+          </config-file>
          <header-file src="src/ios/CDVSoundx.h" />
          <source-file src="src/ios/CDVSoundx.m" />
      </platform>
