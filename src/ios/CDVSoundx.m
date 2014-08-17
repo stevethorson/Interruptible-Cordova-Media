@@ -17,6 +17,7 @@
  under the License.
  */
 
+#import "AppDelegate.h"
 #import "CDVSoundx.h"
 
 @implementation CDVSound (CDVSoundx)
@@ -58,15 +59,18 @@
     */
     //allow audio to START while app is in background mode. Otherwise it must be playing when app enters background.
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [self becomeFirstResponder];
+    //[self becomeFirstResponder];
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(becomeFirstResponder)];
+
 }
 
 - (void) endRemoteControlAudio:(CDVInvokedUrlCommand*)command{
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-    [self resignFirstResponder];
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(resignFirstResponder)];
 }
 
 - (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
+
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
 
     //must release observer when done with it
