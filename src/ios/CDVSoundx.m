@@ -60,7 +60,7 @@
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
 
-- (void) EndRemoteControlAudio:(CDVInvokedUrlCommand*)command{
+- (void) endRemoteControlAudio:(CDVInvokedUrlCommand*)command{
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
 
 }
