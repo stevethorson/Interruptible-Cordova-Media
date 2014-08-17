@@ -37,7 +37,7 @@ var mediaObjects = {};
  * @param statusCallback        The callback to be called when media status has changed.
  *                                  statusCallback(int statusCode) - OPTIONAL
  */
-var Mediax = function(src, successCallback, errorCallback, statusCallback, endInterruptionCallback) {
+var Mediax = function(src, successCallback, errorCallback, statusCallback, beginInterruptionCallback, endInterruptionCallback) {
     argscheck.checkArgs('SFFF', 'Media', arguments);
     this.id = utils.createUUID();
     mediaObjects[this.id] = this;
@@ -46,6 +46,7 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback, endIn
     this.errorCallback = errorCallback;
     this.statusCallback = statusCallback;
     steroids.logger.log("setting endInterruptionCallback to: " + endInterruptionCallback);
+    this.beginInterruptionCallback = beginInterruptionCallback;
     this.endInterruptionCallback = endInterruptionCallback;
     this._duration = -1;
     this._position = -1;
@@ -84,7 +85,7 @@ Mediax.prototype.interruptionBegan = function(message, id) {
     steroids.logger.log("message: " + message + " id: " + id);
 
     var media = mediaObjects[id];
-    media.endInterruptionCallback();
+    media.beginInterruptionCallback();
 };
 Mediax.prototype.interruptionEnded = function(message, id) {
     steroids.logger.log("message: " + message + " id: " + id);
