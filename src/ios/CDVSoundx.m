@@ -58,11 +58,12 @@
     */
     //allow audio to START while app is in background mode. Otherwise it must be playing when app enters background.
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
 }
 
 - (void) endRemoteControlAudio:(CDVInvokedUrlCommand*)command{
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-
+    [self resignFirstResponder];
 }
 
 - (void) stopListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command{
