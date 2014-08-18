@@ -19,10 +19,10 @@
 
 #import "AppDelegate.h"
 #import "CDVSoundx.h"
+ #import <Cordova/NSArray+Comparisons.h>
 
 @implementation CDVSound (CDVSoundx)
 
-@synthesize soundCache, avSession;
 
 - (void)startPlayingAudiox:(CDVInvokedUrlCommand*)command
 {
