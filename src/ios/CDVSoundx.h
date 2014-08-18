@@ -26,7 +26,7 @@
     MEDIA_START_INTERRUPT = MEDIA_STOPPED + 1,
     MEDIA_END_INTERRUPT = MEDIA_STOPPED + 2
 } ExtendedCDVMediaStates;*/
-
+- (void) startPlayingAudiox:(CDVInvokedUrlCommand*)command;
 - (void) startListeningForAudioSessionEvent:(CDVInvokedUrlCommand*)command;
 - (void) startRemoteControlAudio:(CDVInvokedUrlCommand*)command;
 - (void) endRemoteControlAudio:(CDVInvokedUrlCommand*)command;

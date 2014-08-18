@@ -106,7 +106,7 @@ Mediax.prototype.endRemoteControlAudio = function(){
  */
 Mediax.prototype.play = function(options) {
     //steroids.logger.log("mediax play id: " + this.id + " \n callback: " + this.endInterruptionCallback);
-    exec(null, null, "Media", "startPlayingAudio", [this.id, this.src, options]);
+    exec(null, null, "Media", "startPlayingAudiox", [this.id, this.src, options]);
 };
 
 /**

@@ -22,8 +22,9 @@
 
 @implementation CDVSound (CDVSoundx)
 
+@synthesize soundCache, avSession;
 
-- (void)startPlayingAudio:(CDVInvokedUrlCommand*)command
+- (void)startPlayingAudiox:(CDVInvokedUrlCommand*)command
 {
     //Need to call Media's startPlayingAudio first and then call: 
     //look into swizzling to do this? or just copy the code from cordova
