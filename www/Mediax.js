@@ -23,7 +23,7 @@ var argscheck = require('cordova/argscheck'),
     utils = require('cordova/utils'),
     exec = require('cordova/exec');
 
-var mediaObjects = {};
+var mediaxObjects = {};
 
 /**
  * This class provides access to the device media, interfaces to both sound and video
@@ -40,7 +40,7 @@ var mediaObjects = {};
 var Mediax = function(src, successCallback, errorCallback, statusCallback, beginInterruptionCallback, endInterruptionCallback) {
     argscheck.checkArgs('SFFF', 'Media', arguments);
     this.id = utils.createUUID();
-    mediaObjects[this.id] = this;
+    mediaxObjects[this.id] = this;
     this.src = src;
     this.successCallback = successCallback;
     this.errorCallback = errorCallback;
@@ -77,20 +77,20 @@ Mediax.MEDIA_MSG = ["None", "Starting", "Running", "Paused", "Stopped", "Start I
 
 // "static" function to return existing objs.
 Mediax.get = function(id) {
-    return mediaObjects[id];
+    return mediaxObjects[id];
 };
 
 
 Mediax.prototype.interruptionBegan = function(message, id) {
     steroids.logger.log("message: " + message + " id: " + id);
 
-    var media = mediaObjects[id];
+    var media = mediaxObjects[id];
     media.beginInterruptionCallback();
 };
 Mediax.prototype.interruptionEnded = function(message, id) {
     steroids.logger.log("message: " + message + " id: " + id);
 
-    var media = mediaObjects[id];
+    var media = mediaxObjects[id];
     media.endInterruptionCallback();
 };
 Mediax.prototype.startRemoteControlAudio = function(){
@@ -195,7 +195,7 @@ Mediax.prototype.setVolume = function(volume) {
  */
 Mediax.onStatus = function(id, msgType, value) {
 
-    var media = mediaObjects[id];
+    var media = mediaxObjects[id];
 
     if(media) {
         switch(msgType) {
