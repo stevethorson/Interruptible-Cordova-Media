@@ -177,7 +177,7 @@
     }
 
     return resourceURL;
-}/*
+}*/
 
 - (CDVAudioFile*)audioFileForResource:(NSString*)resourcePath withId:(NSString*)mediaId
 {
