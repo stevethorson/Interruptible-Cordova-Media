@@ -18,7 +18,7 @@
  */
 
 #import <Cordova/CDVPlugin.h>
-#import <Cordova/CDVSound.h>
+#import "CDVSound.h"
 
 @interface CDVSound (CDVSoundx)
 
