@@ -27,7 +27,14 @@
 
 #import "AppDelegate.h"
 #import "CDVSoundx.h"
- #import <Cordova/NSArray+Comparisons.h>
+#import <Cordova/NSArray+Comparisons.h>
+#import <Cordova/CDVJSON.h>
+
+#define DOCUMENTS_SCHEME_PREFIX @"documents://"
+#define HTTP_SCHEME_PREFIX @"http://"
+#define HTTPS_SCHEME_PREFIX @"https://"
+#define CDVFILE_PREFIX @"cdvfile://"
+#define RECORDING_WAV @"wav"
 
 @implementation CDVSound (CDVSoundx)
 
@@ -73,7 +80,7 @@
 }
 
 // Maps a url for a resource path for recording
-- (NSURL*)urlForRecording:(NSString*)resourcePath
+/*- (NSURL*)urlForRecording:(NSString*)resourcePath
 {
     NSURL* resourceURL = nil;
     NSString* filePath = nil;
@@ -170,7 +177,7 @@
     }
 
     return resourceURL;
-}
+}/*
 
 - (CDVAudioFile*)audioFileForResource:(NSString*)resourcePath withId:(NSString*)mediaId
 {
@@ -478,7 +485,7 @@
         [self.commandDelegate evalJs:jsString];
     }
 }
-
+/*
 - (void) audioPlayerBeginInterruption: (AVAudioPlayer *) player {
 
 }
@@ -501,7 +508,7 @@
 
     [self.commandDelegate evalJs:jsString];
 }
-
+*/
 - (void)seekToAudio:(CDVInvokedUrlCommand*)command
 {
     // args:
