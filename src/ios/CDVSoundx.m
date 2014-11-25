@@ -742,11 +742,11 @@
 
 - (void)onMemoryWarning
 {
-    [[self soundCache] removeAllObjects];
-    [self setSoundCache:nil];
-    [self setAvSession:nil];
-
-    [super onMemoryWarning];
+//    [[self soundCache] removeAllObjects];
+//    [self setSoundCache:nil];
+//    [self setAvSession:nil];
+//
+//    [super onMemoryWarning];
 }
 
 - (void)dealloc
