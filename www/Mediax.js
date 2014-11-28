@@ -46,8 +46,8 @@ var Mediax = function(src, successCallback, errorCallback, statusCallback, begin
     this.errorCallback = errorCallback;
     this.statusCallback = statusCallback;
     steroids.logger.log("setting endInterruptionCallback to: " + endInterruptionCallback);
-    this.beginInterruptionCallback = beginInterruptionCallback;
-    this.endInterruptionCallback = endInterruptionCallback;
+    this.beginInterruptionCallback = (beginInterruptionCallback != undefined)? beginInterruptionCallback : function(){};
+    this.endInterruptionCallback = (endInterruptionCallback != undefined)? endInterruptionCallback : function(){};
     this._duration = -1;
     this._position = -1;
     var self = this;
